@@ -8,14 +8,14 @@ public class BooksService
 {
     private readonly IMongoCollection<Book> _booksCollection;
 
-    public BooksService(
-        IOptions<BooksDatabaseSettings> booksDatabaseSettings)
+    public BooksService(IOptions<BooksDatabaseSettings> booksDatabaseSettings, IMongoDatabase mongoDatabase)
     {
-        var mongoClient = new MongoClient(
-            booksDatabaseSettings.Value.ConnectionString);
+        //var mongoClient = new MongoClient(
+        //    booksDatabaseSettings.Value.ConnectionString);
 
-        var mongoDatabase = mongoClient.GetDatabase(
-            booksDatabaseSettings.Value.DatabaseName);
+
+        //var mongoDatabase = mongoClient.GetDatabase(
+        //    booksDatabaseSettings.Value.DatabaseName);
 
         _booksCollection = mongoDatabase.GetCollection<Book>(
             booksDatabaseSettings.Value.BooksCollectionName);

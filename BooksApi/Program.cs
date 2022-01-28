@@ -1,13 +1,19 @@
 using BooksApi.Models;
 using BooksApi.Services;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container
+builder.Services.Configure<BooksDatabaseSettings>(builder.Configuration.GetSection("BooksDatabaseSettings"));
 
+builder.Services.AddSingleton<IMongoDatabase>(sp =>
+{
 
-builder.Services.Configure<BooksDatabaseSettings>(
-    builder.Configuration.GetSection("BooksDatabaseSettings"));
+    var connectionString = builder.Configuration["BooksDatabaseSettings:ConnectionString"];
+    var mongoDatabase = new MongoClient(connectionString).GetDatabase(builder.Configuration["BooksDatabaseSettings:DatabaseName"]);
+    return mongoDatabase;
+});
 
 builder.Services.AddSingleton<BooksService>();
 
