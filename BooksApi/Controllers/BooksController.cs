@@ -10,8 +10,11 @@ public class BooksController : ControllerBase
 {
     private readonly BooksService _booksService;
 
-    public BooksController(BooksService booksService) =>
+    public BooksController(BooksService booksService)
+    {
         _booksService = booksService;
+    }
+        
 
     [HttpGet]
     public async Task<List<Book>> Get() =>

@@ -16,6 +16,7 @@ builder.Services.AddSingleton<IMongoDatabase>(sp =>
 });
 
 builder.Services.AddSingleton<BooksService>();
+builder.Services.AddSingleton<TagsService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
